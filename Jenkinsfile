@@ -15,7 +15,7 @@ pipeline {
                     sh '''
                         ssh -o StrictHostKeyChecking=no root@104.248.28.246 "
                             cd /home/CI-CD-Graduation-Project &&
-                            git pull origin main &&
+                            git pull origin main
                         "
                     '''
                 }
