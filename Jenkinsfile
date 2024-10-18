@@ -20,10 +20,5 @@ pipeline {
                 }
 	        }
 	    }
-        stage("Check merging conflicts") {
-            steps {
-                echo 'Check if git pull working without any conflicts.'
-            }
-        }
     }
 }
