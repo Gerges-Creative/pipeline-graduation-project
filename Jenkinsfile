@@ -6,7 +6,6 @@ pipeline {
 	        checkout scmGit(branches: [[name: '*/main']],
             extensions: [[$class: 'CloneOption', noTags: true, shallow: true]],
             userRemoteConfigs: [[credentialsId: 'GitHub-Token', url: 'https://github.com/Gerges-Creative/CI-CD-Graduation-Project.git']])
-            echo 'check jenkins is listening'
 	        }
         }
         stage("Deploy to Server") {
@@ -19,8 +18,12 @@ pipeline {
                         "
                     '''
                 }
-		        echo 'deploying the application...'
 	        }
 	    }
+        stage("Check merging conflicts") {
+            steps {
+                echo 'Check if git pull working without any conflicts.'
+            }
+        }
     }
 }
