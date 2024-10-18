@@ -1,7 +1,7 @@
 pipeline {
     agent any
     stages {
-        stage("build") {
+        stage("Checkout repository") {
             steps {
 	        checkout scmGit(branches: [[name: '*/main']],
             extensions: [[$class: 'CloneOption', noTags: true, shallow: true]],
@@ -13,7 +13,7 @@ pipeline {
     	    steps {
                 sshagent(['App-Deployment']) {
                     sh '''
-                        ssh root@104.248.28.246 "
+                        ssh -o StrictHostKeyChecking=no root@104.248.28.246 "
                             cd /home/CI-CD-Graduation-Project &&
                             git pull origin main &&
                         "
