@@ -4,7 +4,7 @@ pipeline {
 
     stages {
 
-        stage("build") {
+        stage("webhook") {
 
             steps {
 	        checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'GitHub-Token', url: 'https://github.com/Gerges-Creative/CI-CD-Graduation-Project.git']])
@@ -16,6 +16,10 @@ pipeline {
 
 	     steps {
 		 echo 'deploying the application...'
+	     }
+	     sshagent(['deploy-host-keys']) {
+	         // some block
+		 
 	     }
 	 }
     }
