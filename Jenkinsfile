@@ -15,10 +15,25 @@ pipeline {
                         ssh -o StrictHostKeyChecking=no root@104.248.28.246 "
                             cd /home/CI-CD-Graduation-Project &&
                             git pull origin main
+                            docker build -t type-test:latest .
                         "
                     '''
                 }
 	        }
-	    }
+        }
+        stage("Deploy to Server") {
+    	    steps {
+                sshagent(['App-Deployment']) {
+                    sh '''
+                        ssh -o StrictHostKeyChecking=no root@104.248.28.246 "
+                        cd CI-CD-Graduation-Project
+                        docker stop app-container || true &&
+                        docker rm app-container || true &&
+                        docker run -d -p 80:80 --name app-container type-test:latest
+                        "
+                    '''
+                }
+	        }
+        }
     }
 }
