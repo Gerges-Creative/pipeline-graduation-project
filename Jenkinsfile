@@ -21,7 +21,7 @@ pipeline {
                 }
 	        }
         }
-        stage("Deploy to Server") {
+        stage("Run Docker Container") {
     	    steps {
                 sshagent(['App-Deployment']) {
                     sh '''
